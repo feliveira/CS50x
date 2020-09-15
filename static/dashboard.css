@@ -1,0 +1,255 @@
+body
+{
+    font-family:"Poppins", Serif;
+    background-color:#f4f4f4;
+}
+
+#dashboard
+{
+    background: radial-gradient(circle, rgba(1,117,255,1) 0%, rgba(19,71,131,1) 100%); ;
+}
+
+#main
+{
+    padding:20px;
+    overflow:hidden;
+    width:100%;
+    background: radial-gradient(circle, rgba(1,117,255,1) 0%, rgba(19,71,131,1) 100%);
+    height: 100%;
+}
+
+
+
+/* Cards */
+.card-columns
+{
+    font-size: 1.5em;
+
+}
+.card
+{
+    white-space: nowrap;
+}
+.text-center
+{
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);;
+}
+/*-----------------------------------*/
+
+/*Dashboard Navbar*/
+.btn
+{
+    width: 100%;
+}
+.navbar
+{
+    padding: 15px 0px ;
+    background: #022A59;
+}
+
+.nav-link#logout
+{
+    color: white;
+    font-family: "Poppins", sans-serif;
+    transition: 0.3s;
+}
+
+.nav-link#logout:hover
+{
+    color: #e68910;
+}
+
+.navbar-light .navbar-toggler
+{
+    color: rgba(255,255,255,0.5);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+/*-----------------------------------*/
+
+/*Side Nav*/
+
+.side-nav
+{
+    height:100%;
+    width:0;
+    position:fixed;
+    z-index:1;
+    top:0;
+    left:0;
+    background: #022A59;
+    opacity:0.97;
+    overflow-x:hidden;
+    padding-top:60px;
+    transition:0.5s;
+    font-family: "Poppins", sans-serif;
+}
+  
+.side-nav a
+{
+    padding:10px 10px 10px 30px;
+    text-decoration:none;
+    font-size:22px;
+    color:#fff;
+    display:block;
+    transition:0.3s;
+    white-space: nowrap;
+}
+  
+.side-nav a:hover
+{
+    color:#e68910;
+    text-decoration: none;
+}
+  
+.side-nav .btn-close
+{
+    position:absolute;
+    top:0;
+    right:22px;
+    font-size:36px;
+    margin-left:50px;
+}
+
+/*-----------------------------------*/
+
+/*confimation*/
+
+#confirm
+{
+    background: radial-gradient(circle, rgba(1,117,255,1) 0%, rgba(19,71,131,1) 100%);
+    width:100%;
+    height: 100%;
+}
+
+#confirmation::placeholder
+{
+    color: rgba(19,71,131,1);
+    opacity: 0.5;
+    font-family: "Poppins", sans-serif;
+}
+
+#confirmation-form
+{
+    padding: 20px;
+    background: #10447e;
+    height: 100%;
+    border-radius: 2%;
+    margin-top: 5em;
+}
+
+.input-code
+{
+    margin-top: 20px;
+    width: 75%;
+}
+
+.input-confirmation
+{
+    margin-top: 25px;
+    background-color:  #e68910 ;
+}
+.input-confirmation:hover
+{
+    margin-top: 25px;
+    background-color: #e85d04;
+    transition: 0.4s;
+}
+
+/*-----------------------------------*/
+
+/* Currency */
+#currency-box
+{
+    padding: 20px;
+    background: #10447e;
+    height: 100%;
+    border-radius: 2%;
+    margin-top: 3em;
+}
+/*-----------------------------------*/
+
+/* Change Password */
+
+#password-box
+{
+    padding: 20px;
+    background: #10447e;
+    height: 100%;
+    border-radius: 2%;
+    margin-top: 3em;
+}
+
+.input-password
+{
+    margin: 0;
+}
+
+#input-change
+{
+    width: 75%;
+}
+
+/*-----------------------------------*/
+
+
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) 
+{ 
+    .navbar-nav{display:none}
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) 
+{
+    #middle
+    {
+        margin: 0;
+    }
+}
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) 
+{
+    #middle
+    {
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+}
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) 
+{
+   #middle
+   {
+       margin-left: 2px;
+       margin-right: 2px;
+   }
+   #confirmation-form
+   {
+       width: 500px;
+   }
+}
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) 
+{
+    #middle
+   {
+       margin-left: 5px;
+       margin-right: 5px;
+   }
+   #confirmation-form
+   {
+       width: 650px;
+       height: 300px;
+   }
+   #currency-box
+   {
+       width: 650px;
+   }
+   #password-box
+   {
+       width: 650px;
+   }
+}
