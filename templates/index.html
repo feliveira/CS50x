@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Favicon-->
+    <link rel="icon" href="../static/favicon.svg">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Stylesheet-->
+    <link rel="stylesheet" href="../static/reset.css" type="text/css">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <title> C T R L</title>
+    <style>
+        /* Extra small devices (portrait phones, less than 576px) */
+        @media (max-width: 575.98px) 
+        { 
+          .btn-custom
+          {
+              margin: 10px 15px;
+          }
+        
+          h1
+          {
+              font-size: 2em;
+          }
+        }
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) and (max-width: 767.98px) 
+        {
+    h1
+    {
+        font-size: 3em;
+    }
+        }
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991.98px) 
+        {
+    h1
+    {
+        font-size: 4em;
+    }
+        }
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) and (max-width: 1199.98px) 
+        {
+    h1
+    {
+        font-size: 4em;
+    }
+        }
+        /* Extra large devices (large desktops, 1200px and up) */
+        @media (min-width: 1200px) 
+        {
+    h1
+    {
+        font-size: 5em;
+    }
+        }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container">
+          
+          <a href="index.html" class="navbar-brand">
+            <img src="../static/Logo.svg" width="142">
+          </a>
+
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#main-nav">
+            <i class="fas fa-bars text-white"></i>
+          </button>
+          
+          <div class="collapse navbar-collapse" id="main-nav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a href="/register" class="nav-link">Sign Up</a>
+              </li>
+
+              <li class="nav-item division"></li>
+
+              <li class="nav-item">
+                <a href="/login" class="nav-link">Log In</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section id="home" class="d-flex">
+      <div class="container align-self-center">
+        <div class="row">
+          <div class="col-md-12 cover">
+
+            <h1>Be in control of your expenses</h1>
+            <a href="/register" class="btn btn-custom btn-lg">Start Now</a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <!--Popper.js-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!--Bootstrap-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>

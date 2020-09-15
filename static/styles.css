@@ -1,0 +1,78 @@
+/* General and Background */
+hmtl, body, #home
+{
+    height: 200%;
+}
+
+
+body
+{
+    background: radial-gradient(circle, rgba(1,117,255,1) 0%, rgba(19,71,131,1) 100%);
+    
+}
+/*---------------------------------------------------------------------------------------------------------*/
+
+/* Navbar settings */
+.navbar
+{
+    padding: 15px 0px ;
+    background: rgba(0,0, 0, 0.6);
+}
+.navbar-light .navbar-nav .nav-link
+{
+    color: white;
+    font-family: "Poppins", sans-serif;
+}
+.navbar-light .navbar-nav .nav-link:hover
+{
+    color: #9bf0e1;
+}
+.navbar-light .navbar-toggler
+{
+    color: rgba(255,255,255,0.5);
+    border-color: rgba(255, 255, 255, 0.7);
+}
+
+.division
+{
+    width: 1px;
+    background: white;
+    margin: 12px 15px;
+}
+/*---------------------------------------------------------------------------------------------------------*/
+
+/* Body */
+.cover
+{
+    text-align: center;
+    margin-top: 7em;
+}
+.btn-custom
+{
+    font-family: "Poppins", sans-serif;
+    color: white;
+    border-radius: 500px;
+    -webkit-border-radius: 500px;
+    -moz-border-radius: 500px;
+    transition: background 0.4s color 0.4s;
+    padding: 15px 30px;
+    background: #e68910;
+}
+
+.btn-custom:hover
+{
+    background: #134783;
+    color: white;
+}
+/*---------------------------------------------------------------------------------------------------------*/
+
+/* Typography */
+h1
+{
+    font-family: "Poppins", sans-serif;
+    font-weight: 900;
+    margin-bottom: 50px;
+    color: white;
+}
+/*---------------------------------------------------------------------------------------------------------*/
+
