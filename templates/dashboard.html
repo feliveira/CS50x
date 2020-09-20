@@ -51,13 +51,13 @@
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
     <a href="#" class="sidenav-item"><i class="fas fa-chart-line"></i> Dashboard</a>
     <a href="#" class="sidenav-item"><i class="fas fa-wallet"></i> Savings</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-money-bill-wave-alt"></i>Expenses</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-cog"></i> Settings</a>
+    <a href="#" class="sidenav-item"><i class="fas fa-money-bill-wave-alt"></i> Expenses</a>
+    <a href="/settings" class="sidenav-item"><i class="fas fa-cog"></i> Settings</a>
   </div>
 
   <div id="main" onclick="closeSlideMenu();">
     
-    <h1 class="text-center">Hello, user! &#128516 </h1>
+    <h1 class="text-center">Hello, {{user}}! &#128516 </h1>
     
     <br>
 
@@ -73,7 +73,7 @@
         </div>
         <div class="card-body">
           <p class="card-text text-center">
-            $ 100000
+            {{info['balance']}}
           </p>
         </div>    
       </div>
@@ -86,7 +86,7 @@
         </div>
         <div class="card-body">
           <p class="card-text text-center">
-            $ 100000
+            {{info['bills']}}
           </p>
         </div>
       </div>
@@ -104,7 +104,7 @@
         </div>
         <div class="card-body">
           <p class="card-text text-center">
-            $ 100000
+            {{info['food']}}
           </p>
         </div>
       </div>
@@ -117,7 +117,7 @@
         </div>
         <div class="card-body">
           <p class="card-text text-center">
-            $ 100000
+            {{info['shopping']}}
           </p>
         </div>
       </div>
@@ -129,12 +129,12 @@
       <div class="card bg-info text-white">
         <div class="card-header text-center ">
           <button type="button" class="btn btn-info text-center" data-toggle="modal" data-target="#other">
-            <span class="text-center" style="font-size: 28px;">Other</span>
+            <span class="text-center" style="font-size: 28px;">Savings</span>
           </button>
         </div>
         <div class="card-body">
           <p class="card-text text-center">
-            $ 100000
+            {{info['savings']}}
           </p>
         </div>
       </div>
@@ -142,12 +142,12 @@
       <div class="card bg-secondary text-white">
         <div class="card-header text-center">
           <button type="button" class="btn btn-secondary text-center" data-toggle="modal" data-target="#savings">
-            <span class="text-center" style="font-size: 28px;">Savings</span>
+            <span class="text-center" style="font-size: 28px;">Other</span>
           </button>
         </div>
         <div class="card-body">
           <p class="card-text text-center">
-            $ 100000
+            {{info['other']}}
           </p>
         </div>
       </div>

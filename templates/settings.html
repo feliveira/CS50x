@@ -49,9 +49,9 @@
 
   <div id="side-menu" class="side-nav">
     <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-chart-line"></i> Dashboard</a>
+    <a href="/dashboard" class="sidenav-item"><i class="fas fa-chart-line"></i> Dashboard</a>
     <a href="#" class="sidenav-item"><i class="fas fa-wallet"></i> Savings</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-money-bill-wave-alt"></i>Expenses</a>
+    <a href="#" class="sidenav-item"><i class="fas fa-money-bill-wave-alt"></i> Expenses</a>
     <a href="#" class="sidenav-item"><i class="fas fa-cog"></i> Settings</a>
   </div>
 
@@ -59,21 +59,52 @@
 
     <div class="container">
       <div class="col d-flex justify-content-center align-items-center mt-auto">
-          <form action="/currency"> 
+          <form action="/settings" method = "POST"> 
           <div class="form-group" id="currency-box">
               <h3 class="text-center card-header mb-4">
                   Select the currency you use the most
               </h3>
-            <select name="currency" id="currency" class="custom-select">
-              <option value="USD">United States Dollar</option>
-              <option value="EUR">Euro</option>
-              <option value="BRL">Brazillian Real</option>
+            <select name="currency" id="currency" class="custom-select" required>
+              {% if currency == "$" %}
+                <option value="USD" disabled>Current: United States Dollar</option>
+              {%else%}
+                <option value="USD">United States Dollar</option>
+              {%endif%}
+
+              {% if currency == "€" %}
+                <option value="EUR" disabled>Current: Euro</option>
+              {%else%}
+                <option value="EUR">Euro</option>
+              {%endif%}
+
+              {% if currency == "₹" %}
+                <option value="IR" disabled>Current: Indian Rupee</option>
+              {% else %}
+              <option value="IR">Indian Rupee</option>
+              {% endif %}
+
+              {% if currency == "R$" %}
+                <option value="BR" disabled>Current: Brazillian Real</option>
+              {%else%}
+                <option value="BR">Brazillian Real</option>
+              {% endif %}
+              
+              {% if currency == "K" %}
+              <option value="BMK" disabled>Current: Burmese Kyat</option>
+              {%else%}
+              <option value="BMK">Burmese Kyat</option>
+              {%endif%}
+              
             </select>
           <div class="text-left mb-3">
               
             <button type="submit" class="btn text-center input-confirmation">
                   <span class="text-center">Save Changes</span>
               </button>
+              {%if saved%}
+              <br>
+              <h4 style="color: rgb(38, 175, 141); text-align: center;">{{saved}}</h4>
+              {%endif%}
           </div>
           </div>
         </form>   
@@ -82,7 +113,7 @@
 
     <div class="container">
       <div class="col d-flex justify-content-center align-items-center mt-auto">
-          <form action="/change"> 
+          <form action="/settings" method = "POST"> 
           
             <div class="form-group" id="password-box">
               <h3 class="card-header text-center mb-4">
@@ -92,18 +123,38 @@
               <div class="text-left mb-3">
             
                 <div class="form-input">
+                  {%if savedpass%}
+                  <h4 style="color: rgb(38, 175, 141); text-align: center;">{{savedpass}}</h4>
+                  {%endif%}
                   <label class="input-password text-center" for="current">Enter your current password</label>
-                  <input id="current" type="password" name="current" placeholder="Current Password" class="form-control text-center input-change" required>
+                  <input id="current" minlength="8" maxlength="30" type="password" name="current" placeholder="Current Password"
+                    class="form-control text-center input-change" required>
+                    {%if invcur%}
+                    <br>
+                    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invcur}}</h4>
+                    {%endif%}
                 </div>
                 <br>
                 <div class="input-password">
                   <label class="input-password text-center" for="new">Enter your new password</label>
-                  <input id="new" type="password" class="form-control text-center input-change" name="password" placeholder="Password" required>
+                  <input id="new" type="password" minlength="8" maxlength="30"
+                    class="form-control text-center input-change" name="password" placeholder="Password" required>
+                    {%if invnew%}
+                    <br>
+                    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invnew}}</h4>
+                    {%endif%}
                 </div>
                 <br>
                 <div class="input-password">
                   <label class="input-password text-center" for="confirmation">Confirm your new password</label>
-                  <input id="confirmation" type="password" class="form-control text-center input-change" name="confirmation" placeholder="Confirm your Password" required>
+                  <input id="confirmation" type="password" minlength="8" maxlength="30"
+                    class="form-control text-center input-change" name="confirmation"
+                    placeholder="Confirm your Password" required>
+                    {%if invconf%}
+                    <br>
+                    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invconf}}</h4>
+                    {%endif%}
+                    
                 </div>
                 <div class="input-password">
                   <button type="submit" class="btn text-center input-confirmation">
