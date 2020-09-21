@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %} Income {% endblock %}
+
+{% block main %}
+<div onclick="closeSlideMenu()" style="height: 650px;">
+    <div class="container">
+        <div class="col d-flex justify-content-center align-items-center mt-auto">
+            <form action="/settings" method = "POST"> 
+                <div class="form-group" id="currency-box">
+                    <h3 class="text-center card-header mb-3">
+                        Income
+                    </h3>
+      
+                    <label for="income" class="input-password text-center">Select what you would like to do:</label>
+                    <select name="income" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
+                        <option value="addmoney"> Add Money </option>
+                        <option value="addmonthly"> Add Money - Monthly </option>
+                        <option value="remove"> Remove Money </option>
+                        <option value="changemoney"> Change income value </option>
+                    </select>
+                    
+                    <br>
+                    
+                    <div class="form-input" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                        <label for="money" class="input-password text-center">Input the value wanted: </label>
+                        <input type="number" class="form-control input-change" placeholder="{{session['curr']}}" required>
+                    </div>
+
+                    <div class="text-left mb-1">
+                        <button type="submit" class="btn text-center input-confirmation">
+                            <span class="text-center">Save Changes</span>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="col d-flex justify-content-center align-items-center mt-0">
+            <div id="currency-box" class="container">
+                <h3 class="text-center card-header mb-4 mt-0">
+                    Your currently income value
+                </h3>
+                <div class="form-input" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                    <input type="number" disabled class="form-control input-change" placeholder="{{session['curr']}} incomevalue" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+        
+{% endblock %}

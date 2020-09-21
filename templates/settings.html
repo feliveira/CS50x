@@ -1,191 +1,135 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!--Meta Tags-->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>Settings</title>
-  
-  <!--Favicon-->
-  <link rel="icon" href="../static/favicon.svg">
+{% extends "layout.html" %}
 
-  <!--Stylesheet-->
-  <link rel="stylesheet" href="../static/dashboard.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+{% block title %} Settings {% endblock %}
 
-  <!--Google Fonts-->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+{% block main %}
+<div onclick="closeSlideMenu();"> <!--Main Div-->
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <div class="container">
+    
+    <!--Change password possible errors-->
+    {%if invcur%}
+    <br>
+    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invcur}}</h4>
+    {%endif%}
 
-</head>
-<body id="confirm" onload="openSlideMenu();">
-  
-  <header>
-    <nav class="navbar navbar-light">
-      <div class="container">
-        
+    {%if invnew%}
+      <br>
+      <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invnew}}</h4>
+    {%endif%}
 
-        <button class="navbar-toggler mr-auto" onclick="openSlideMenu();">
-          <i class="fas fa-bars text-white"></i>
-        </button>
+    {%if invconf%}
+      <br>
+      <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invconf}}</h4>
+    {%endif%}
 
+    <!--Confirmation if a new Password is saved-->
+    {%if savedpass%}
+      <h4 style="color: #90e0ef; margin-top: 10px; text-align: center;">{{savedpass}}</h4>
+    {%endif%}
 
-        <a href="" class="navbar-brand">
-          <img src="../static/Logo.svg" width="142">
-        </a>
-          <ul class="navbar-nav ml-auto">
+    <div class="col d-flex justify-content-center align-items-center mt-auto">
+      
+      <!--Start of Currency Form-->
+      <form action="/settings" method = "POST"> 
+        <div class="form-group" id="currency-box">
+          <h3 class="text-center card-header mb-4">
+            Select the currency you use the most
+          </h3>
+          
+          <select name="currency" id="currency" class="custom-select" required>
+            {% if currency == "$" %}
+              <option value="USD" disabled>Current: United States Dollar</option>
+            {%else%}
+              <option value="USD">United States Dollar</option>
+            {%endif%}
 
-            <li class="nav-item">
-              <a href="/logout" class="nav-link" id="logout">Logout</a>
-            </li>
-          </ul>
+            {% if currency == "€" %}
+              <option value="EUR" disabled>Current: Euro</option>
+            {%else%}
+              <option value="EUR">Euro</option>
+            {%endif%}
+
+            {% if currency == "₹" %}
+              <option value="IR" disabled>Current: Indian Rupee</option>
+            {% else %}
+              <option value="IR">Indian Rupee</option>
+            {% endif %}
+
+            {% if currency == "R$" %}
+              <option value="BR" disabled>Current: Brazillian Real</option>
+            {%else%}
+              <option value="BR">Brazillian Real</option>
+            {% endif %}
+              
+            {% if currency == "K" %}
+              <option value="BMK" disabled>Current: Burmese Kyat</option>
+            {%else%}
+              <option value="BMK">Burmese Kyat</option>
+            {%endif%} 
+          </select>
+
+          <div class="text-left mb-3">
+            <button type="submit" class="btn text-center input-confirmation">
+                <span class="text-center">Save Changes</span>
+            </button>
+            
+            {%if saved%}
+              <br>
+              <h4 style="color: #90e0ef; margin-top: 10px; text-align: center;">{{saved}}</h4>
+            {%endif%}
+
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
-
-  <div id="side-menu" class="side-nav">
-    <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
-    <a href="/dashboard" class="sidenav-item"><i class="fas fa-chart-line"></i> Dashboard</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-wallet"></i> Savings</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-money-bill-wave-alt"></i> Expenses</a>
-    <a href="#" class="sidenav-item"><i class="fas fa-cog"></i> Settings</a>
+      </form>   
+    </div>
   </div>
 
-  <div onclick="closeSlideMenu();">
-
-    <div class="container">
-      <div class="col d-flex justify-content-center align-items-center mt-auto">
-          <form action="/settings" method = "POST"> 
-          <div class="form-group" id="currency-box">
-              <h3 class="text-center card-header mb-4">
-                  Select the currency you use the most
-              </h3>
-            <select name="currency" id="currency" class="custom-select" required>
-              {% if currency == "$" %}
-                <option value="USD" disabled>Current: United States Dollar</option>
-              {%else%}
-                <option value="USD">United States Dollar</option>
-              {%endif%}
-
-              {% if currency == "€" %}
-                <option value="EUR" disabled>Current: Euro</option>
-              {%else%}
-                <option value="EUR">Euro</option>
-              {%endif%}
-
-              {% if currency == "₹" %}
-                <option value="IR" disabled>Current: Indian Rupee</option>
-              {% else %}
-              <option value="IR">Indian Rupee</option>
-              {% endif %}
-
-              {% if currency == "R$" %}
-                <option value="BR" disabled>Current: Brazillian Real</option>
-              {%else%}
-                <option value="BR">Brazillian Real</option>
-              {% endif %}
-              
-              {% if currency == "K" %}
-              <option value="BMK" disabled>Current: Burmese Kyat</option>
-              {%else%}
-              <option value="BMK">Burmese Kyat</option>
-              {%endif%}
-              
-            </select>
+  <div class="container">
+    <div class="col d-flex justify-content-center align-items-center mt-auto">
+      <!--Start of Change Password Form-->
+      <form action="/settings" method = "POST"> 
+          
+        <div class="form-group" id="password-box">
+          <h3 class="card-header text-center mb-4">
+            Change your Password
+          </h3>
+          
           <div class="text-left mb-3">
-              
-            <button type="submit" class="btn text-center input-confirmation">
-                  <span class="text-center">Save Changes</span>
-              </button>
-              {%if saved%}
-              <br>
-              <h4 style="color: rgb(38, 175, 141); text-align: center;">{{saved}}</h4>
-              {%endif%}
-          </div>
-          </div>
-        </form>   
-      </div>
-    </div>
-
-    <div class="container">
-      <div class="col d-flex justify-content-center align-items-center mt-auto">
-          <form action="/settings" method = "POST"> 
-          
-            <div class="form-group" id="password-box">
-              <h3 class="card-header text-center mb-4">
-                  Change your Password
-              </h3>
-          
-              <div class="text-left mb-3">
             
-                <div class="form-input">
-                  {%if savedpass%}
-                  <h4 style="color: rgb(38, 175, 141); text-align: center;">{{savedpass}}</h4>
-                  {%endif%}
-                  <label class="input-password text-center" for="current">Enter your current password</label>
-                  <input id="current" minlength="8" maxlength="30" type="password" name="current" placeholder="Current Password"
-                    class="form-control text-center input-change" required>
-                    {%if invcur%}
-                    <br>
-                    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invcur}}</h4>
-                    {%endif%}
-                </div>
-                <br>
-                <div class="input-password">
-                  <label class="input-password text-center" for="new">Enter your new password</label>
-                  <input id="new" type="password" minlength="8" maxlength="30"
-                    class="form-control text-center input-change" name="password" placeholder="Password" required>
-                    {%if invnew%}
-                    <br>
-                    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invnew}}</h4>
-                    {%endif%}
-                </div>
-                <br>
-                <div class="input-password">
-                  <label class="input-password text-center" for="confirmation">Confirm your new password</label>
-                  <input id="confirmation" type="password" minlength="8" maxlength="30"
-                    class="form-control text-center input-change" name="confirmation"
-                    placeholder="Confirm your Password" required>
-                    {%if invconf%}
-                    <br>
-                    <h4 style="color: rgb(255, 103, 1); text-align: center;">{{invconf}}</h4>
-                    {%endif%}
-                    
-                </div>
-                <div class="input-password">
-                  <button type="submit" class="btn text-center input-confirmation">
-                    <span class="text-center">Change your Password</span>
-                  </button>
-                </div>
-                </div>
-              </div>
-        </form>   
-      </div>
+            <div class="form-input">
+              <label class="input-password text-center" for="current">Enter your current password</label>
+              <input id="current" minlength="8" maxlength="30" type="password" name="current" placeholder="Current Password"
+              class="form-control text-center input-change" required>
+            </div>
+              
+              <br>
+            
+            <div class="input-password">
+              <label class="input-password text-center" for="new">Enter your new password</label>
+                <input id="new" type="password" minlength="8" maxlength="30"
+                class="form-control text-center input-change" name="password" placeholder="New password" required>
+            </div>
+              
+            <br>
+                
+            <div class="input-password">
+              <label class="input-password text-center" for="confirmationpw">Confirm your new password</label>
+              <input id="confirmationpw" type="password" minlength="8" maxlength="30"
+              class="form-control text-center input-change" name="confirmation" placeholder="Confirm your new password" required>
+            </div>
+
+            <div class="input-password">
+              <button type="submit" class="btn text-center input-confirmation">
+                <span class="text-center">Change your Password</span>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </form>   
     </div>
-    
-    </div>
+  </div>
+</div><!--End of Main Div-->
   
-  <script>
-    function openSlideMenu()
-    {
-      document.getElementById('side-menu').style.width = '250px';
-    }
-
-    function closeSlideMenu()
-    {
-      document.getElementById('side-menu').style.width = '0px';
-    }
-  </script>
-
-  <!--Jquery-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <!--Popper.js-->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <!--Bootstrap-->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
