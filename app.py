@@ -89,9 +89,9 @@ def settings():
             if not check_password_hash(rows[0][2], request.form.get('current')):
                 return render_template('settings.html', currency = session['curr'], invcur = 'Invalid current password!')
             elif request.form.get('password') == request.form.get('current'):
-                return render_template('settings.html', currency = session['curr'], invnew = 'New password cannot be same as old password!')
+                return render_template('settings.html', currency = session['curr'], invnew = 'New password cannot be the same as the old password!')
             elif not good_password(request.form.get('password')):
-                return render_template('settings.html', currency = session['curr'], invnew = 'You password must contain one uppercase character and a number!')
+                return render_template('settings.html', currency = session['curr'], invnew = 'Your password must contain one uppercase character and a number!')
             elif request.form.get('password') != request.form.get('confirmation'):
                 return render_template('settings.html', currency = session['curr'], invconf = 'New passwords must match!')
             else:
@@ -103,6 +103,25 @@ def settings():
 
     else:
         return render_template('settings.html', currency = session["curr"])
+
+# Income Page
+@app.route("/income", methods=["GET","POST"])
+def income():
+    if request.method == "POST":
+        #All of the logic needed
+        return 0
+    else:
+        return render_template('income.html')
+
+# Expenses Page
+@app.route("/expenses", methods=["GET","POST"])
+def expenses():
+    if request.method == "POST":
+        #All of the logic needed
+        return 0
+    else:
+        return render_template('expenses.html')
+
 
 
 # Login page
