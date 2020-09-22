@@ -1,12 +1,9 @@
-#Just pip install these
-
+# Just pip install these
 py3-validate-email
-
 flask
-
 flask_session
-
 werkzeug
-
-#This one is different you have to install it in thier website. Check this out ---> https://www.youtube.com/watch?v=wXEZZ2JT3-k
+requests
+python-dotenv
+# This one is different you have to install it in their website. Check this out ---> https://www.youtube.com/watch?v=wXEZZ2JT3-k
 sqlite3
