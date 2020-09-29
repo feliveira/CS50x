@@ -13,12 +13,19 @@
                     </h3>
       
                     <label for="income" class="input-password text-center">Select what you would like to do:</label>
-                    <select name="income" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
-                        <option value="addmoney"> Add Money </option>
-                        <option value="addmonthly"> Add Money - Monthly </option>
-                        <option value="remove"> Remove Money </option>
-                        <option value="changemoney"> Change income value </option>
+                    <select name="income" onchange="showCheckBox(this.value)" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
+                        <option id="addmoney" value="addmoney">Add money</option>
+                        <option  value="changemonthly">Change monthly income</option>
+                        <option  value="changefull">Change other income value</option>
                     </select>
+
+                    
+                    <div class="form-check" id="addcheck">
+                        <input class="form-check-input" id="monthly" type="checkbox">
+                        <label class="form-check-label text-center" for="monthly">
+                            Check this if the value will be received monthly
+                        </label>
+                    </div>
                     
                     <br>
                     
@@ -38,17 +45,84 @@
         </div>
         <div class="col d-flex justify-content-center align-items-center mt-0">
             <div id="currency-box" class="container">
-                <h3 class="text-center card-header mb-4 mt-0">
-                    Your currently income value
-                </h3>
-                <div class="form-input" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                    <input type="number" disabled class="form-control input-change" placeholder="{{session['curr']}} incomevalue" required>
-                </div>
+                    <h3 class="text-center card-header mb-4 mt-0">Currently income value:</h3>
+                    
+                    <div class="form-input mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                        <label class="text-center" for="monthly">Monthly:</label>
+                        <input type="number" id="monthly" disabled class="form-control input-change" placeholder="{{session['curr']}} incomevalue">
+                    </div>
+                    <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                        <label class="text-center" for="other">Other&nbsp;income&nbsp;value:</label>
+                        <input type="number" id="other" disabled class="form-control input-change" placeholder="{{session['curr']}} otherincomevalue">
+                    </div>
+                    <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                        <label class="text-center" for="total">Total:</label>
+                        <input type="number" id="total" disabled class="form-control input-change" placeholder="{{session['curr']}} totalincomevalue">
+                    </div>
+
+                    <div class="text-left mb-1">
+                        <button data-toggle="modal" data-target="#history" type="submit" class="btn text-center input-confirmation">
+                            <span class="text-center"><i class="fas fa-history"></i> Click to see your past additions</span>
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
+    <div class="modal fade" id="history" tabindex="-1" role="dialog" aria-labelledby="History" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">History</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-dark ">
+                    <thead class="table-custom">
+                        <tr class="text-center">
+                          <th>Value</th>
+                          <th>Transacted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--TODO System to generate the table-->
+                        
+                        <!--{% for adding in addings %}-->
+                            <tr>
+                                <td> <!--adding--> </td>
+                            </tr>
+                        <!--{% endfor %}-->
+                    </tbody>
+                  </table>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     
     
+
 </div>
+<script>
+    function showCheckBox(value)
+    {
+        if (value === 'addmoney')
+        {
+            document.getElementById('addcheck').style.display = 'block'
+        }
+        else
+        {
+            document.getElementById('addcheck').style.display = 'none'
+        }
+    }
+
+</script>
         
 {% endblock %}
+
+<h3 class="text-center card-header mb-4 mt-4">
+    Your income history 
+</h3>
