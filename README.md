@@ -1,7 +1,9 @@
-# C T R L - CS50 Final Project
-A web application created to make finance management easier.
+# :money_with_wings: C T R L - CS50 Final Project
+A web application created to make finance management easier.  
+Built with HTML, CSS, JavaScript, Python, Flask and SQL
 
-## Made by
+
+## The project was made by
 
 :black_medium_square: [abhilash-katuru](https://github.com/abhilash-katuru)
 
