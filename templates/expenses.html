@@ -10,17 +10,11 @@
 
 <div class="row mx-auto">
   <div class="col d-flex justify-content-center align-items-center ">
-    <form action="/settings" method = "POST"> 
+    <form action="/expenses" method = "POST"> 
         <div class="form-group" id="currency-box">
             <h3 class="text-center card-header mb-3">
                 Expenses
             </h3>
-
-            <label for="expense" class="input-password text-center">Select what you would like to do:</label>
-            <select name="expense" id="expense" onchange="dealExpenseSelect(this.value)" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
-                <option value="addexpense"> Add Expense </option>
-                <option value="removeexpense"> Remove Expense </option>
-            </select>
 
             <!--Select Expense Category-->
             <div id="category" class="mb-4">
@@ -33,22 +27,10 @@
                     <option value="other">Other</option>
                 </select>
             </div>
-
-            <!--Select Expense to Remove-->
-            <div id="expenses" style="display: none;">
-                <label for="expenses" class="input-password text-center">Choose an expense to remove:</label>
-                <select name="expenses" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select">
-                    <option value="test">test</option>
-                    <!--
-                        TODO
-                        ADD EXPENSES AS OPTIONS 
-                    -->
-                </select>
-            </div>
             
             <div class="form-input" style="font-family: 'Poppins', sans-serif; font-weight: 600;" id="inputvalue">
-                <label for="money" class="input-password text-center">Input the value wanted: </label>
-                <input type="number" class="form-control input-change" placeholder="{{session['curr']}}" required>
+                <label for="money" class="input-password text-center">Input the expense value: </label>
+                <input type="number" name = 'val' class="form-control input-change" placeholder="{{session['curr']}}" required>
             </div>
 
             <div class="text-left mb-1">
@@ -56,6 +38,10 @@
                     <span class="text-center">Save Changes</span>
                 </button>
             </div>
+            {%if text%}
+                <br>
+                <h4 style="color: #90e0ef; margin-top: 10px; text-align: center;">{{text}}</h4>
+            {%endif%}
           </div>
         </div>
     </form>
@@ -66,7 +52,7 @@
     <div id="currency-box" class="container">
         <div class="text-left mb-1">
             <button type="button" data-toggle="modal" data-target="#expensesmodal" class="btn text-center input-confirmation">
-                <span class="text-center">See your expenses</span>
+                <span class="text-center">See your past expenses</span>
             </button>
         </div>
     </div>
@@ -74,104 +60,9 @@
 
 <hr class="mt-4">
 
-<!--Savings Part-->
-
-<div class="row mx-auto">
-    <div class="col d-flex justify-content-center align-items-center mb-0">
-      <form action="/settings" method = "POST"> 
-          <div class="form-group" id="currency-box">
-              <h3 class="text-center card-header mb-3">
-                  Savings
-              </h3>
-  
-              <label for="expense" class="input-password text-center">Select what you would like to do:</label>
-              <select name="expense" id="savings" onchange="showSavingsTitles(this.value)" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
-                  <option value="addSaving"> Add Saving </option>
-                  <option value="changeSaving"> Change Saving Value </option>
-                  <option value="removeSaving"> Remove Saving </option>
-              </select>
 
 
-              <div id="saving" style="display: none;" class="mb-3">
-                <label for="savings" class="input-password text-center">Choose a saving:</label>
-                <select name="savings" id="savings" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select">
-                    <option value="test">test</option>
-                    <!--
-                        TODO
-                        ADD SAVINGS AS OPTIONS 
-                    -->
-                </select>
-            </div>
 
-              <div class="form-input" id="addsavingname" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                <label for="savingnames" class="input-password text-center">Input the saving title: </label>
-                <input type="text" id="savingnames" class="form-control input-change mb-4" required>
-            </div>
-              
-              <div class="form-input mt-0.5" style="font-family: 'Poppins', sans-serif; font-weight: 600;" id="savingValueDiv">
-                  <label for="money" class="input-password text-center"><span id="savingValue">Input the saving value:</span></label>
-                  <input type="number" class="form-control input-change" placeholder="{{session['curr']}}" required>
-              </div>
-  
-              <div class="text-left mb-1">
-                  <button type="submit" class="btn text-center input-confirmation">
-                      <span class="text-center">Save Changes</span>
-                  </button>
-              </div>
-            </div>
-          </div>
-      </form>
-    </div>
-  </div>
-
-  <div class="col d-flex justify-content-center align-items-center mt-0">
-    <div id="currency-box" class="container">
-        <div class="text-left mb-1">
-            <button type="button" data-toggle="modal" data-target="#savingsmodal" class="btn text-center input-confirmation">
-                <span class="text-center">See your savings</span>
-            </button>
-        </div>
-    </div>
-  </div>
-
-
-  <!--Savings Modal-->
-
-  <div class="modal fade" id="savingsmodal" tabindex="-1" role="dialog" aria-labelledby="Savings" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Savings</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <table class="table table-dark ">
-                <thead class="table-custom">
-                    <tr class="text-center">
-                      <th>Name</th>
-                      <th>Value</th>
-                      <th>Transacted</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--TODO System to generate the table-->
-                    
-                    <!--{% for saving in savings %}-->
-                        <tr>
-                            <td> <!--saving--> </td>
-                        </tr>
-                    <!--{% endfor %}-->
-                </tbody>
-              </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!--Expenses Modal-->
 
@@ -188,20 +79,21 @@
             <table class="table table-dark ">
                 <thead class="table-custom" >
                     <tr class="text-center">
-                      <th>Name</th>
-                      <th>Value</th>
+                      <th>Date / GMT</th>
                       <th>Category</th>
-                      <th>Date</th>
+                      <th>Value</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!--TODO System to generate the table-->
                     
-                    <!--{% for saving in savings %}-->
-                        <tr>
-                            <td> <!--saving--> </td>
+                    {% for i in range(history|length) %}
+                        <tr style = "text-align: center;">
+                            <td> {{history[i][0]}} </td>
+                            <td> {{history[i][1]}} </td>
+                            <td> {{history[i][2]}} </td>
                         </tr>
-                    <!--{% endfor %}-->
+                    {% endfor %}
                 </tbody>
               </table>
         </div>

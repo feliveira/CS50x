@@ -6,23 +6,23 @@
 <div onclick="closeSlideMenu()" style="height: 650px;">
     <div class="container">
         <div class="col d-flex justify-content-center align-items-center mt-auto">
-            <form action="/settings" method = "POST"> 
+            <form action="/income" method = "POST"> 
                 <div class="form-group" id="currency-box">
                     <h3 class="text-center card-header mb-3">
                         Income
                     </h3>
       
                     <label for="income" class="input-password text-center">Select what you would like to do:</label>
-                    <select name="income" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
+                    <select name="task" onchange="showCheckBox(this.value)" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
                         <option id="addmoney" value="addmoney">Add money</option>
-                        <option  value="changefull">Change income value</option>
+                        <option  value="changemonthly">Change monthly income</option>
                     </select>
-                    
+        
                     <br>
                     
                     <div class="form-input" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
                         <label for="money" class="input-password text-center">Input the value wanted: </label>
-                        <input type="number" class="form-control input-change" placeholder="{{session['curr']}}" required>
+                        <input type="number" name="amount" class="form-control input-change" placeholder="{{session['curr']}}" required>
                     </div>
 
                     <div class="text-left mb-1">
@@ -30,16 +30,28 @@
                             <span class="text-center">Save Changes</span>
                         </button>
                     </div>
-
+                    {%if text%}
+                        <br>
+                        <h4 style="color: #90e0ef; margin-top: 10px; text-align: center;">{{text}}</h4>
+                    {%endif%}
                 </div>
             </form>
         </div>
         <div class="col d-flex justify-content-center align-items-center mt-0">
             <div id="currency-box" class="container">
-                    <h3 class="text-center card-header mb-4 mt-0">Currently income value</h3>
+                    <h3 class="text-center card-header mb-4 mt-0">Current income value</h3>
                     
                     <div class="form-input mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                        <input type="number" id="incomevalue" disabled class="form-control input-change" placeholder="{{session['curr']}} incomevalue">
+                        <label class="text-center" for="monthly">Monthly:</label>
+                        <input type="text" id="monthly" value = "{{monthly}}" disabled class="form-control input-change">
+                    </div>
+                    <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                        <label class="text-center" for="other">Other&nbsp;income&nbsp;value:</label>
+                        <input type="text" id="other" value = "{{oiv}}" disabled class="form-control input-change" placeholder="{{session['curr']}} otherincomevalue">
+                    </div>
+                    <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+                        <label class="text-center" for="total">Total:</label>
+                        <input type="text" id="total" value = "{{ttl}}" disabled class="form-control input-change" placeholder="{{session['curr']}} totalincomevalue">
                     </div>
 
                     <div class="text-left mb-1">
@@ -64,18 +76,19 @@
                 <table class="table table-dark ">
                     <thead class="table-custom">
                         <tr class="text-center">
-                          <th>Value</th>
-                          <th>Transacted</th>
+                          <th>Date / GMT</th>
+                          <th>Value Deposited</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!--TODO System to generate the table-->
                         
-                        <!--{% for adding in addings %}-->
-                            <tr>
-                                <td> <!--adding--> </td>
+                        {% for i in range(history|length) %}
+                            <tr style = "text-align: center;">
+                                <td> {{history[i][0]}} </td>
+                                <td> {{history[i][1]}} </td>
                             </tr>
-                        <!--{% endfor %}-->
+                        {% endfor %}
                     </tbody>
                   </table>
             </div>
@@ -89,4 +102,17 @@
     
 
 </div>
+<script>
+    function showCheckBox(value)
+    {
+        if (value === 'addmoney')
+        {
+            document.getElementById('addcheck').style.display = 'block'
+        }
+        else
+        {
+            document.getElementById('addcheck').style.display = 'none'
+        }
+    }
+</script>
 {% endblock %}

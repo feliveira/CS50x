@@ -1,23 +1,16 @@
+from validate_email import validate_email
 import string
 import os
-from functools import wraps
-from re import fullmatch
 import requests
 import urllib.parse
-from validate_email import validate_email
-from flask import redirect, request, session
+
+from flask import redirect, render_template, request, session
+from functools import wraps
 
 def is_valid_email(email):
-    return validate_email(
-        email_address=email,
-        check_regex=True,
-        check_mx=True,
-        from_address='my@from.addr.ess',
-        helo_host='my.host.name',
-        smtp_timeout=10,
-        dns_timeout=10,
-        use_blacklist=True
-    )
+    is_valid = validate_email(email_address=email,check_regex=True, check_mx=True,from_address='my@from.addr.ess', helo_host='my.host.name',smtp_timeout=10, dns_timeout=10, use_blacklist=True)
+    return is_valid
+
 
 def login_required(f):
     """
@@ -27,10 +20,11 @@ def login_required(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("user_id") is None:
+        if session.get("userid") is None:
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
+
 
 def convert(num, curr):
     return f'{curr} {num}'
@@ -48,12 +42,28 @@ def convert_currency(t):
         return '€'
 
 def good_password(key):
-    """
-    A good password must have:
-    
-    - 8 or more characters
-    - At least one uppercase character
-    - At least one lowercase character
-    - At least one digit
-    """
-    return fullmatch(r'[A-Za-z0-9]{8,}', key)
+    c1 = False
+    c2 = False
+    c3 = False
+    c4 = False
+    for i in key:
+        if i.isdigit():
+            c1 = True
+            break
+
+    for i in key:
+        if i.isalpha():
+            c2 = True
+            break
+    if len(key) >= 8:
+        c3 = True
+    for i in key:
+        if i.isupper():
+            c4 = True
+
+    if c1 == True and c2 == True and c3 == True and c4 == True:
+        return True
+    else:
+        return False
+        
+
