@@ -8,7 +8,7 @@ from flask import redirect, render_template, request, session
 from functools import wraps
 
 def is_valid_email(email):
-    is_valid = validate_email(email_address=email,check_regex=True, check_mx=True,from_address='my@from.addr.ess', helo_host='my.host.name',smtp_timeout=10, dns_timeout=10, use_blacklist=True)
+    is_valid = validate_email(email_address=email,check_regex=True, check_mx=False)
     return is_valid
 
 
