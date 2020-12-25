@@ -17,11 +17,14 @@ It is the route where the user can add their income, they can change the value t
 
 ### Expenses
 
-As the name says, it is where the user can register or delete all of their expenses, when the user add an expense they can define in which category the expense fits, then organizing and dividing each one in their properly place. Below the input field there is a button like the one that the user can find in the income page, but now it shows the history of the user expenses.
-
+As the name says, it is where the user can register or delete all of their expenses, when the user add an expense they can define in which category the expense fits, then organizing and dividing each one in their properly place. Below the input field there is a button like the one that the user can find in the income page, but now it shows the history of the user expenses.  
+In the same page the user can add, change value, and remove an saving, giving a title for every one of them, being then in much more control of how they spend their money, below the input field there is also a button that shows the history of savings.
 
 ### Settings
 
+The last but not the least, the settings page is where the user can change their password and/or the currency symbol that will show next to the treated values.
+
+And in every one of the routes there is a button in the upper right corner called **Logout** that will logout the user when clicked, redirecting them back to the index page.
 
 ## Requirements
 
