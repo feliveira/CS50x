@@ -101,10 +101,25 @@ def dashboard():
     other = conn.execute('select sum(amount) from expenses WHERE userid = {} and category = "other"'
                          .format(str(session["userid"]))).fetchone()[0] or 0
 
+    charts_data = {}
+    charts = ['savings_chart', 'bills_chart', 'other_chart', 'food_chart', 'shopping_chart']
+    for chart in charts:
+        chart_data = conn.execute('select date, amount from expenses where userid = {} and category = "{}"'
+                                  .format(str(session["userid"]), chart[:-6])).fetchall()
+        charts_data[chart] = list(zip(*chart_data))
+    # expenses_data = conn.execute('select date, amount from expenses where userid = {}'
+    #                             .format(str(session["userid"]))).fetchall()
+    # income_data = conn.execute('select date, amount from income where userid = {}'
+    #                             .format(str(session["userid"]))).fetchall()
+    # charts_data['balance_chart'] = list(zip(*sorted(expenses_data + income_data)))
+    # print(charts_data['balance_chart'])
+
+
     info = {'balance': convert(balance, session['curr']), 'bills': convert(
         bills, session['curr']), 'food': convert(food, session['curr']), 'shopping': convert(shopping, session['curr']), 'savings': convert(savings, session['curr']), 'other': convert(other, session['curr'])}
 
-    return render_template("dashboard.html", user = rows[0][1], info=info)
+
+    return render_template("dashboard.html", user = rows[0][1], info=info, charts_data=charts_data)
 
 #Income Page
 

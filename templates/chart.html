@@ -1,0 +1,28 @@
+{% macro chart(id, labels, data) -%}
+    <canvas id="{{ id }}" width="400" height="300"></canvas>
+    <script>
+    var ctx = document.getElementById('{{ id }}').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ labels }},
+            datasets: [{
+                label: 'Amount for the previous 7 days',
+                data: {{ data }},
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+{%- endmacro %}

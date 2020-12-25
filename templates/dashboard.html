@@ -1,10 +1,11 @@
+{% from "chart.html" import chart %}
 {% extends "layout.html" %}
 
 {% block title %}Dashboard{% endblock %}
 
 
 {% block main %}  
-    
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
 <div id="main" onclick="closeSlideMenu();">
       
     <h1 class="text-center">Hello, {{user}}! &#128516 </h1>
@@ -119,7 +120,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <canvas id="balance_chart" width="400" height="300"></canvas>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -140,7 +141,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <canvas id="bills_chart" width="400" height="300"></canvas>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -161,7 +162,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <canvas id="food_chart" width="400" height="300"></canvas>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -182,7 +183,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <canvas id="shopping_chart" width="400" height="300"></canvas>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -203,7 +204,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <canvas id="other_chart" width="400" height="300"></canvas>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -224,7 +225,7 @@
           </button>
         </div>
         <div class="modal-body">
-          ...
+          <canvas id="savings_chart" width="400" height="300"></canvas>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -232,6 +233,41 @@
       </div>
     </div>
   </div>
+  <script>
+    const charts = {{ charts_data | tojson }};
+    for (const chart in charts) {
+        if (charts[chart][0]) {
+            labels = charts[chart][0].slice(-5);
+            data = charts[chart][1].slice(-5);
+        } else {
+            labels = [];
+            data = [];
+        }
+        var ctx = document.getElementById(chart).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Trends for last 5 transactions',
+                    data: data,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+  </script>
   <!--Savings end-->
 
 {% endblock %}
