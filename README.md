@@ -1,6 +1,6 @@
 # :money_with_wings: C T R L - CS50x Final Project
 A web application created to make finance management easier.  
-Built with HTML, CSS, JavaScript, Python, Flask and SQL
+Built with HTML, CSS, JavaScript, Bootstrap, Python, Flask and SQL.
 
 ## How it works
 
