@@ -13,9 +13,9 @@
                     </h3>
       
                     <label for="income" class="input-password text-center">Select what you would like to do:</label>
-                    <select name="task" onchange="showCheckBox(this.value)" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
+                    <select name="task" id="income" style="font-family: 'Poppins', sans-serif; font-weight: 600;" class="custom-select mb-4" required>
                         <option id="addmoney" value="addmoney">Add money</option>
-                        <option  value="changemonthly">Change monthly income</option>
+                        <option  value="changemonthly">Change income value</option>
                     </select>
         
                     <br>
@@ -40,17 +40,7 @@
         <div class="col d-flex justify-content-center align-items-center mt-0">
             <div id="currency-box" class="container">
                     <h3 class="text-center card-header mb-4 mt-0">Current income value</h3>
-                    
-                    <div class="form-input mb-2" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                        <label class="text-center" for="monthly">Monthly:</label>
-                        <input type="text" id="monthly" value = "{{monthly}}" disabled class="form-control input-change">
-                    </div>
                     <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                        <label class="text-center" for="other">Other&nbsp;income&nbsp;value:</label>
-                        <input type="text" id="other" value = "{{oiv}}" disabled class="form-control input-change" placeholder="{{session['curr']}} otherincomevalue">
-                    </div>
-                    <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
-                        <label class="text-center" for="total">Total:</label>
                         <input type="text" id="total" value = "{{ttl}}" disabled class="form-control input-change" placeholder="{{session['curr']}} totalincomevalue">
                     </div>
 
@@ -98,21 +88,5 @@
           </div>
         </div>
       </div>
-    
-    
-
 </div>
-<script>
-    function showCheckBox(value)
-    {
-        if (value === 'addmoney')
-        {
-            document.getElementById('addcheck').style.display = 'block'
-        }
-        else
-        {
-            document.getElementById('addcheck').style.display = 'none'
-        }
-    }
-</script>
 {% endblock %}
