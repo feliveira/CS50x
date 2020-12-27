@@ -267,6 +267,21 @@
             }
         });
     }
+    var ctx = document.getElementById("balance_chart").getContext('2d');
+    new Chart(ctx, {
+        "type":"doughnut",
+        "data": {
+            "labels": ["Income", "Expenses"],
+            "datasets": [{
+                "label": "Income-expense ratio",
+                "data": [{{ ttl_income | tojson }}, {{ ttl_expenses | tojson }}],
+                "backgroundColor": [
+                    "rgb(54, 162, 235)",
+                    "rgb(255, 99, 132)",
+                ]
+            }]
+        }
+    });
   </script>
   <!--Savings end-->
 

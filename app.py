@@ -107,19 +107,17 @@ def dashboard():
         chart_data = conn.execute('select date, amount from expenses where userid = {} and category = "{}"'
                                   .format(str(session["userid"]), chart[:-6])).fetchall()
         charts_data[chart] = list(zip(*chart_data))
-    # expenses_data = conn.execute('select date, amount from expenses where userid = {}'
-    #                             .format(str(session["userid"]))).fetchall()
-    # income_data = conn.execute('select date, amount from income where userid = {}'
-    #                             .format(str(session["userid"]))).fetchall()
-    # charts_data['balance_chart'] = list(zip(*sorted(expenses_data + income_data)))
-    # print(charts_data['balance_chart'])
+    ttl_expenses = conn.execute('select sum(amount) from expenses where userid = {}'
+                                .format(str(session["userid"]))).fetchall()
+    ttl_income = conn.execute('select sum(amount) from income where userid = {}'
+                                .format(str(session["userid"]))).fetchall()
 
 
     info = {'balance': convert(balance, session['curr']), 'bills': convert(
         bills, session['curr']), 'food': convert(food, session['curr']), 'shopping': convert(shopping, session['curr']), 'savings': convert(savings, session['curr']), 'other': convert(other, session['curr'])}
 
 
-    return render_template("dashboard.html", user = rows[0][1], info=info, charts_data=charts_data)
+    return render_template("dashboard.html", user = rows[0][1], info=info, charts_data=charts_data, ttl_expenses=ttl_expenses, ttl_income=ttl_income)
 
 #Income Page
 
@@ -189,6 +187,8 @@ def expenses():
         "SELECT date, category, amount FROM expenses WHERE userid = " + str(session['userid']) + ";")
     history = history.fetchall()
 
+    ttl = conn.execute('select sum(amount) from expenses WHERE userid = {id}'.format(id=str(session["userid"]))).fetchone()[0]
+
     if request.method == "POST":
         cat = request.form.get('categories')
         val = request.form.get('val')
@@ -200,7 +200,7 @@ def expenses():
         return redirect('/expenses')
     
     elif request.method == "GET":
-        return render_template('expenses.html', history = history)
+        return render_template('expenses.html', history = history, ttl=ttl)
 
 
 #Settings page

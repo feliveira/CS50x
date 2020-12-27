@@ -50,9 +50,13 @@
 
 <div class="col d-flex justify-content-center align-items-center mt-0">
     <div id="currency-box" class="container">
+        <h3 class="text-center card-header mb-4 mt-0">Current expense value</h3>
+        <div class="form-input mb-2 mt-3" style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+            <input type="text" id="total" value = "{{ttl}}" disabled class="form-control input-change" placeholder="{{session['curr']}} totalexpensevalue">
+        </div>
         <div class="text-left mb-1">
             <button type="button" data-toggle="modal" data-target="#expensesmodal" class="btn text-center input-confirmation">
-                <span class="text-center">See your past expenses</span>
+                <span class="text-center"><i class="fas fa-history"></i> See your past expenses</span>
             </button>
         </div>
     </div>
